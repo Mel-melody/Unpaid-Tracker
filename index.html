@@ -1141,8 +1141,7 @@ for(var s=0;s<items.length;s+=400)(function(part){
 out=out.then(function(){
 var writes=part.map(function(it){var f={j:{stringValue:it.j},u:{integerValue:String(nextU(0))}};if(it.del)f.del={booleanValue:true};max=Math.max(max,parseInt(f.u.integerValue,10));
 return {update:{name:DOCS+"/tracker/main/"+col+"/"+(col==="meta"?it.id:did(it.id)),fields:f}}});
-return api(BASE+":batchWrite",{method:"POST",body:JSON.stringify({writes:writes})}).then(function(j){
-var st=(j&&j.status)||[];for(var i=0;i<st.length;i++){if(st[i]&&st[i].code){var c=st[i].code,m=st[i].message||"";throw err(c===7?"DENIED":"HTTP","Could not save: "+m)}}})})})(items.slice(s,s+400));
+return api(BASE+":commit",{method:"POST",body:JSON.stringify({writes:writes})}).then(function(j){})})})(items.slice(s,s+400));
 return out.then(function(){return max})}
 function pull(since){
 var all=[];
