@@ -258,6 +258,7 @@ html.locked body>*:not(#login){visibility:hidden}
 <div class="card" id="acct" style="margin-top:12px"><b>Account</b>
 <div class="mute" id="acem" style="margin:4px 0"></div>
 <div id="acst" style="margin:4px 0 8px">Starting…</div>
+<div class="mute" id="acid" style="word-break:break-all;font-size:12px;margin-bottom:8px;user-select:all"></div>
 <div class="row"><button class="btn alt" id="acsync">Sync now</button><button class="btn alt" id="acfull">Get everything</button></div>
 <div class="mute" style="margin:6px 0">Get everything: asks Firebase for all bills again. It never deletes anything you changed on this phone.</div>
 <button class="btn bad" id="acout">Sign out</button></div>
@@ -1094,6 +1095,7 @@ function saveA(){try{if(A)localStorage.setItem(AK,JSON.stringify(A));else localS
 function err(code,msg){var e=new Error(msg||code);e.code=code;return e}
 function netErr(e){return e&&e.code?e:err("NET","No internet")}
 function jf(url,opt){return fetch(url,opt).catch(function(){throw err("NET","No internet")})}
+function info(){var o={email:"",uid:"",verified:""};try{if(A&&A.it){var p=A.it.split(".")[1].replace(/-/g,"+").replace(/_/g,"/");var c=JSON.parse(atob(p));o={email:c.email||"",uid:c.user_id||c.sub||"",verified:String(c.email_verified)}}}catch(e){}if(!o.email&&A)o.email=A.email||"";if(!o.uid&&A)o.uid=A.uid||"";return o}
 function user(){return A&&A.rt?{email:A.email||""}:null}
 function signOut(){A=null;saveA()}
 function signIn(email,pw){
@@ -1118,6 +1120,7 @@ if(!A)return Promise.reject(err("SIGNED_OUT","Signed out"));
 if(!force&&A.it&&A.exp-Date.now()>300000)return Promise.resolve(A.it);
 return refresh().then(function(){return A.it})}
 function api(url,opt,retry){
+var op=(opt&&opt.method||"GET")+" "+url.replace(BASE,"").replace(/^\//,"");
 return tok(retry).then(function(t){
 opt=opt||{};opt.headers=opt.headers||{};opt.headers.Authorization="Bearer "+t;if(opt.body)opt.headers["Content-Type"]="application/json";
 return jf(url,opt).then(function(r){
@@ -1125,9 +1128,9 @@ if(r.status===401&&!retry)return api(url,opt,true);
 if(r.status===404)return null;
 return r.json().then(function(j){
 if(!r.ok){var m=(j&&j.error&&j.error.message)||"";
-if(r.status===403||(j&&j.error&&j.error.status==="PERMISSION_DENIED"))throw err("DENIED","Firebase says no (rules or API key). "+m);
+if(r.status===403||(j&&j.error&&j.error.status==="PERMISSION_DENIED"))throw err("DENIED","Firebase says no [" +op+" "+r.status+"]. "+m);
 if(r.status===401)throw err("SIGNED_OUT","Signed out");
-throw err("HTTP","Firebase error "+r.status+". "+m)}
+throw err("HTTP","Firebase error ["+op+" "+r.status+"]. "+m)}
 return j},function(){if(!r.ok)throw err("HTTP","Firebase error "+r.status);return null})})})
 .catch(function(e){throw netErr(e)})}
 function did(id){return "b"+String(id).replace(/[^A-Za-z0-9_-]/g,"_")}
@@ -1153,7 +1156,7 @@ return page(since)}
 function getMeta(id){
 return api(BASE+"/tracker/main/meta/"+id,{method:"GET"}).then(function(d){
 if(!d||!d.fields)return null;return {j:(d.fields.j&&d.fields.j.stringValue)||"",u:parseInt((d.fields.u&&d.fields.u.integerValue)||"0",10)}})}
-window.FB={user:user,signIn:signIn,signOut:signOut,push:push,pull:pull,getMeta:getMeta,ready:true};
+window.FB={info:info,user:user,signIn:signIn,signOut:signOut,push:push,pull:pull,getMeta:getMeta,ready:true};
 })();
 
 </script>
@@ -1170,7 +1173,7 @@ function ky(r){return [r.d||"",(r.w||"").trim().toLowerCase(),(r.c||"").trim().t
 function waiting(){var n=0,by={};rows.forEach(function(r){by[r.id]=1;if(S.m[r.id]!==rh(r))n++});Object.keys(S.m).forEach(function(id){if(!by[id])n++});
 if(hs(sj(set))!==S.setH)n++;if(hs(sj(PRE))!==S.preH)n++;return n}
 function hm(){var d=new Date();return ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)}
-function show(k,t){kind=k;txt=t;var p=$("syp");if(p){p.className="sm sy-"+k;p.hidden=false}var a=$("acst");if(a)a.textContent=t;var e=$("acem");var u=window.FB&&FB.user();if(e)e.textContent=u?u.email:""}
+function show(k,t){kind=k;txt=t;var p=$("syp");if(p){p.className="sm sy-"+k;p.hidden=false}var a=$("acst");if(a)a.textContent=t;var e=$("acem");var u=window.FB&&FB.user();if(e)e.textContent=u?u.email:"";var d=$("acid");if(d&&u&&FB.info){var i=FB.info();d.textContent="Login details: email "+i.email+" | id "+i.uid}}
 function ok(){lastOk=hm();var w=waiting();if(w)show("wait",w+" change"+(w>1?"s":"")+" waiting to save.");else show("ok","All saved to Firebase at "+lastOk+".")}
 function fail(e){var c=e&&e.code;
 if(c==="SIGNED_OUT"){gate("Please sign in again.");return}
