@@ -6,7 +6,7 @@
 <title>Unpaid Tracker</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0f6b4f">
-
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%20400%20400%22%20aria-hidden%3D%22true%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22fg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2318a070%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230a5a42%22/%3E%3C/linearGradient%3E%3ClinearGradient%20id%3D%22ft%22%20x1%3D%220%22%20y1%3D%221%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%237ff0de%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2327d3bd%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%22400%22%20height%3D%22400%22%20rx%3D%2290%22%20fill%3D%22url%28%23fg%29%22/%3E%3Ctext%20x%3D%22200%22%20y%3D%22250%22%20text-anchor%3D%22middle%22%20font-size%3D%22150%22%20font-weight%3D%22900%22%20fill%3D%22%23f8f8f2%22%20font-family%3D%22Arial%20Black%2CArial%2Csans-serif%22%20letter-spacing%3D%22-6%22%3EUnp%3C/text%3E%3Ccircle%20cx%3D%2286%22%20cy%3D%22106%22%20r%3D%2218%22%20fill%3D%22%23ff4d6d%22/%3E%3Cpath%20d%3D%22M58%2C296%20C140%2C326%20250%2C322%20340%2C262%20L322%2C246%20C250%2C292%20150%2C296%2058%2C296Z%22%20fill%3D%22url%28%23ft%29%22/%3E%3Cpath%20d%3D%22M340%2C262%20L322%2C246%20L352%2C244Z%22%20fill%3D%22%23f8f8f2%22/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%20400%20400%22%20aria-hidden%3D%22true%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22fg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2318a070%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230a5a42%22/%3E%3C/linearGradient%3E%3ClinearGradient%20id%3D%22ft%22%20x1%3D%220%22%20y1%3D%221%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%237ff0de%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2327d3bd%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%22400%22%20height%3D%22400%22%20rx%3D%2290%22%20fill%3D%22url%28%23fg%29%22/%3E%3Ctext%20x%3D%22200%22%20y%3D%22250%22%20text-anchor%3D%22middle%22%20font-size%3D%22150%22%20font-weight%3D%22900%22%20fill%3D%22%23f8f8f2%22%20font-family%3D%22Arial%20Black%2CArial%2Csans-serif%22%20letter-spacing%3D%22-6%22%3EUnp%3C/text%3E%3Ccircle%20cx%3D%2286%22%20cy%3D%22106%22%20r%3D%2218%22%20fill%3D%22%23ff4d6d%22/%3E%3Cpath%20d%3D%22M58%2C296%20C140%2C326%20250%2C322%20340%2C262%20L322%2C246%20C250%2C292%20150%2C296%2058%2C296Z%22%20fill%3D%22url%28%23ft%29%22/%3E%3Cpath%20d%3D%22M340%2C262%20L322%2C246%20L352%2C244Z%22%20fill%3D%22%23f8f8f2%22/%3E%3C/svg%3E">
 <style>
@@ -29,6 +29,7 @@ button:active:not(:disabled),.lb:active{filter:brightness(.78);transform:scale(.
 #impck .sm.on::before{content:"\2713  "}
 .lb{display:block;text-align:center;box-sizing:border-box;cursor:pointer;font-size:inherit;line-height:normal}
 .vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
+.gc{background:var(--acc)!important;color:var(--accink)!important;border-color:var(--acc)!important}.gc .mute{color:var(--accink)!important;opacity:.88}.gc .sm,.gc input{background:#fff;color:#12261d;border:1px solid var(--line)}.gc .box{color:#12261d}.gc .box .mute{color:#5c6f65!important;opacity:1}
 .btn{padding:10px 14px;border:0;border-radius:9px;background:var(--acc);color:var(--accink);font-weight:700;margin-top:8px;width:100%}
 .btn.alt{background:var(--soft);color:var(--ink)}
 .btn.bad{background:transparent;color:var(--bad);border:1px solid var(--bad)}
@@ -133,12 +134,13 @@ html.locked body>*:not(#login){visibility:hidden}
 <div id="scanrev" hidden></div>
 <div class="card" id="newform" style="margin-bottom:8px" hidden>
 <label for="fd" style="margin-top:0">Date</label><input id="fd" type="date">
-<label for="fw">Waiter</label><input id="fw" placeholder="Waiter name" autocapitalize="words">
-<label for="fc">Customer</label><input id="fc" placeholder="Customer name" autocapitalize="words">
+<label for="fw">Waiter</label><input id="fw" placeholder="Waiter name" autocapitalize="words" enterkeyhint="next" autocomplete="off"><div id="fwsug" class="row" style="gap:6px;margin-top:4px;flex-wrap:wrap"></div>
+<label for="fc">Customer</label><input id="fc" placeholder="Customer name" autocapitalize="words" enterkeyhint="next">
 <div class="row"><div><label for="fa">Amount</label><input id="fa" type="number" inputmode="decimal"></div>
 <div><label for="fp">Paid (optional)</label><input id="fp" type="number" inputmode="decimal"></div></div>
 <div id="fchk"></div>
 <div class="row"><button class="btn" id="save" style="margin-top:6px">Save</button><button class="btn alt" id="ncancel" style="margin-top:6px">Cancel</button></div>
+<div id="newlist" style="margin-top:10px"></div>
 </div>
 </div>
 <div class="card" id="hcard" hidden></div>
@@ -164,8 +166,8 @@ html.locked body>*:not(#login){visibility:hidden}
 </section>
 
 <section id="v-today" hidden>
-<div class="card"><div class="bar" style="align-items:flex-start"><div style="min-width:0"><b id="thead"></b><div class="mute">Shift runs 8 am to 8 am</div><div class="mute" id="tfn" hidden></div></div><div style="text-align:right;flex:none"><div class="row" style="justify-content:flex-end;align-items:center;gap:6px"><button class="sm" id="tnow" hidden style="flex:none">Today</button><input type="date" id="tday" aria-label="Pick a shift day" style="width:150px;flex:none;padding:6px 8px"></div><div class="amt" id="ttot" style="margin-top:4px"></div><div class="mute" id="tcnt" style="text-align:right"></div></div></div></div>
-<div class="card" id="tcol"></div>
+<div class="card gc"><div class="bar" style="align-items:flex-start"><div style="min-width:0"><b id="thead"></b><div class="mute">Shift runs 8 am to 8 am</div><div class="mute" id="tfn" hidden></div></div><div style="text-align:right;flex:none"><div class="row" style="justify-content:flex-end;align-items:center;gap:6px"><button class="sm" id="tnow" hidden style="flex:none">Today</button><input type="date" id="tday" aria-label="Pick a shift day" style="width:150px;flex:none;padding:6px 8px"></div><div class="amt" id="ttot" style="margin-top:4px"></div><div class="mute" id="tcnt" style="text-align:right"></div></div></div></div>
+<div class="card gc" id="tcol"></div>
 <div id="titems"></div>
 <div class="row"><button class="btn" id="tcopy">Copy list</button><button class="btn alt" id="tall">Open in Bills</button></div>
 <pre id="pre-today" hidden></pre>
@@ -262,6 +264,23 @@ html.locked body>*:not(#login){visibility:hidden}
 <div class="row"><button class="btn alt" id="acsync">Sync now</button><button class="btn alt" id="acfull">Get everything</button></div>
 <div class="mute" style="margin:6px 0">Get everything: asks Firebase for all bills again. It never deletes anything you changed on this phone.</div>
 <button class="btn bad" id="acout">Sign out</button></div>
+<button class="sm" id="advtog" style="margin-top:12px">Advanced tools &#9660;</button>
+<div id="advc" hidden>
+<div class="card"><b>Rename a name everywhere</b>
+<p class="mute" style="margin:6px 0 0">Careful: this changes ALL bills with that name. Check first, then tap Rename twice. You can Undo.</p>
+<label>Change</label><select id="rnk"><option value="w">Waiter name</option><option value="c">Customer name</option></select>
+<label>Old name</label><input id="rno" autocapitalize="words">
+<label>New name</label><input id="rnn" autocapitalize="words">
+<div class="row"><button class="btn alt" id="rnchk">Check</button><button class="btn" id="rngo" disabled>Rename</button></div>
+<div id="rnmsg" class="mute" style="margin-top:6px"></div></div>
+<div class="card"><b>Safety copies</b>
+<p class="mute" style="margin:6px 0 0">The app keeps a copy of all your bills before every big change, and one each day. They stay on this phone. Restore asks twice.</p>
+<button class="btn alt" id="sntog">Show safety copies</button><div id="snmsg" style="margin-top:6px"></div></div>
+<div class="card"><b>Fix names from a file</b>
+<p class="mute" style="margin:6px 0 0">Use this when names were changed by mistake. Pick your corrected Excel file. The app matches bills by date and amount, and fixes only the waiter and customer names. Your payments stay. Nothing is added. Nothing is saved until you tap Fix names twice.</p>
+<label class="btn alt lb" id="fxbtn" for="fxfile" style="margin-top:8px">Choose corrected Excel file</label><input type="file" id="fxfile" class="vh" multiple accept=".xlsx,.csv,.tsv,.txt">
+<div id="fxmsg" style="margin-top:8px"></div></div>
+</div>
 </section>
 </main>
 
@@ -271,7 +290,7 @@ html.locked body>*:not(#login){visibility:hidden}
 var KEY="unpaid_v1",SKEY="unpaid_set_v1",UKEY="unpaid_undo_v1",BKEY="unpaid_bk_at";
 var TDAY="";
 var rows=[],set={x:"Abass, Adamu, C-O, Yonas, Solomon-S, Hanna, Debe S, Anileye",n:"Shalodie=Shalody"},UNDO=[];
-var SPAY=null,EXP=null,TCOP=false,SPOPEN=false,RSOPEN=false,BKERR="",SBOPEN=false,SSTW=null,SW={},SC={},DD=null,SB=false,STC=null,STK="c",CT={},WL={},MSUB="c",TL=[],skipX=false,TAB="bills",TSEG="c",MSEG="imp",NEWOPEN=false,SSEG="own",fOpen=false,payOpen=false,MS={},editId=null,delArm=null,payArm=null,bulkArm=false,bulkSig="",SIG="",CUR=[],TODAYL=[],fdTouched=false,clrArm=false,rsArm=false;
+var SPAY=null,EXP=null,TEXPK=null,TCOP=false,SPOPEN=false,RSOPEN=false,BKERR="",SBOPEN=false,SSTW=null,SW={},SC={},DD=null,SB=false,STC=null,STK="c",CT={},WL={},MSUB="c",TL=[],skipX=false,TAB="bills",TSEG="c",MSEG="imp",NEWOPEN=false,SSEG="own",fOpen=false,payOpen=false,MS={},editId=null,delArm=null,payArm=null,bulkArm=false,bulkSig="",SIG="",CUR=[],TODAYL=[],fdTouched=false,clrArm=false,rsArm=false;
 var MN=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 function $(i){return document.getElementById(i)}
 function ux(a,b){var o=[],l={};((a||"")+","+(b||"")).split(",").forEach(function(x){x=x.trim();var k=x.toLowerCase();if(x&&!l[k]){l[k]=1;o.push(x)}});return o.join(", ")}
@@ -279,7 +298,8 @@ function mx(o){if(o&&typeof o.x!=="string"&&(o.c!==undefined||o.w!==undefined))o
 function mpre(a){return a.map(function(p){return typeof p.x==="string"?{n:p.n,x:p.x}:{n:p.n,x:ux(p.c,p.w)}})}
 function load(){try{var u=localStorage.getItem(UKEY);if(u){UNDO=JSON.parse(u).map(function(e){return typeof e==="string"?{s:e,t:"Earlier change",d:"",at:0}:e})}}catch(e){}try{var a=localStorage.getItem(KEY);if(a)rows=JSON.parse(a);var s=localStorage.getItem(SKEY);if(s){var o=mx(JSON.parse(s));for(var k in o)set[k]=o[k]}}catch(e){}}
 var BOOT=true,CKEY="unpaid_chg_at";
-function save(){try{localStorage.setItem(KEY,JSON.stringify(rows));localStorage.setItem(SKEY,JSON.stringify(set));if(!BOOT)localStorage.setItem(CKEY,stamp())}catch(e){}if(window.SYNC&&!BOOT)SYNC.dirty()}
+function ordFix(){var mx=0,i;for(i=0;i<rows.length;i++)if(rows[i].o>mx)mx=rows[i].o;for(i=0;i<rows.length;i++)if(!(rows[i].o>0))rows[i].o=++mx}
+function save(){ordFix();try{localStorage.setItem(KEY,JSON.stringify(rows));localStorage.setItem(SKEY,JSON.stringify(set));if(!BOOT)localStorage.setItem(CKEY,stamp())}catch(e){}if(window.SYNC&&!BOOT)SYNC.dirty()}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function fmt(n){return Math.round(n).toLocaleString("en-US")}
 function isIso(d){return /^\d{4}-\d{2}-\d{2}$/.test(d||"")}
@@ -346,7 +366,7 @@ function persistU(){while(UNDO.length){try{localStorage.setItem(UKEY,JSON.string
 function pushUndo(s,lab){UNDO=UNDO.filter(function(e){return!e.u});var d;try{d=lab?[lab,""]:desc(JSON.parse(s),rows)}catch(e){d=["Changed bills",""]}
 UNDO.push({s:s,t:d[0],d:d[1],at:Date.now()});while(UNDO.length>20)UNDO.shift();
 var n=0;UNDO.forEach(function(e){n+=e.s.length});while(n>3000000&&UNDO.length>3){n-=UNDO[0].s.length;UNDO.shift()}persistU()}
-function done(b,lab){if(JSON.stringify(rows)!==b)pushUndo(b,lab)}
+function done(b,lab){if(JSON.stringify(rows)!==b){if(lab)snap(b,lab);pushUndo(b,lab)}}
 function lastU(){for(var i=UNDO.length-1;i>=0;i--)if(!UNDO[i].u)return i;return -1}
 function firstR(){for(var i=0;i<UNDO.length;i++)if(UNDO[i].u)return i;return -1}
 function doUndo(){var i=lastU();if(i<0)return;var e=UNDO[i];e.a=JSON.stringify(rows);e.u=true;rows=JSON.parse(e.s);persistU();save();TACT="redo";render();say("Undid: "+e.t+(e.d?" \u00b7 "+e.d:""),false,false,"Redo")}
@@ -393,9 +413,8 @@ function editCard(r){var i=r.id;return '<div class="card"><b>Edit bill</b>'+
 '<label>Customer</label><input id="ec'+i+'" value="'+esc(r.c||"")+'" autocapitalize="words">'+
 '<label>Bill amount</label><input type="number" inputmode="decimal" id="ea'+i+'" value="'+r.a+'">'+
 (r.p?'<div class="mute" style="margin-top:6px">Already paid: '+fmt(r.p)+'</div>':'')+
-'<label class="chk"><input type="checkbox" id="er'+i+'" checked><span>Change the old name on all other bills too</span></label>'+
 '<div class="pay" style="margin-top:10px"><button data-a="esave" data-id="'+i+'">Save</button><button data-a="ecancel" data-id="'+i+'">Cancel</button></div><div class="mute" style="color:var(--bad)" id="em'+i+'"></div></div>'}
-function card(r,g){if(editId===r.id)return editCard(r);
+function card(r,g){if(editId===r.id&&!NLEDIT)return editCard(r);
 if(rem(r)<=0)return '<div class="card"><div class="top"><b>'+(g==="c"?wdot(r.w)+esc(r.w):cn(r.c||"(no customer)"))+'</b><span class="amt">'+fmt(r.a)+'</span></div><div class="mute">'+(g?'':wdot(r.w)+esc(r.w)+' · ')+dmy(r.d)+' · bill '+fmt(r.a)+', paid in full'+(r.pd?' on '+dmy(r.pd):'')+(r.s?' · <span class="fsb">FS</span>':'')+'</div><div class="pay"><button data-a="edit" data-id="'+r.id+'">Edit</button><button data-a="reopen" data-id="'+r.id+'">Reopen</button><button data-a="del" data-id="'+r.id+'">'+(delArm===r.id?'Sure?':'Del')+'</button></div></div>';
 return '<div class="card"><div class="top"><b>'+(g==="c"?wdot(r.w)+esc(r.w):cn(r.c||"(no customer)"))+'</b><span class="amt">'+fmt(rem(r))+'</span></div><div class="mute">'+(g?'':wdot(r.w)+esc(r.w)+' · ')+dmy(r.d)+' · bill '+fmt(r.a)+(r.p?', paid '+fmt(r.p):'')+(r.s?' · <span class="fsb">FS</span>':'')+'</div>'+
 '<div class="act"><div class="al"><div class="pay"><input type="number" inputmode="decimal" placeholder="Paid" id="p'+r.id+'"><button data-a="part" data-id="'+r.id+'">Pay</button></div><div class="r2"><button data-a="edit" data-id="'+r.id+'">Edit</button><button data-a="del" data-id="'+r.id+'">'+(delArm===r.id?'Sure?':'Del')+'</button></div></div><div class="ar"><button data-a="full"'+(PEND[r.id]?' class="und"':'')+' data-id="'+r.id+'">'+(PEND[r.id]?'UNDO':'PAID \u2713')+'</button><button class="fs'+(r.s?' on':'')+'" data-a="flag" data-id="'+r.id+'">'+(r.s?'Unmark':'FS')+'</button></div></div>'+(PEND[r.id]?'<div class="stamp">PAID \u2713</div>':'')+'</div>'}
@@ -423,7 +442,7 @@ function render(){
 calcDots();var T=TAB;
 ["bills","today","totals","salary","more"].forEach(function(k){$("v-"+k).hidden=k!==T;$("n-"+k).className=k===T?"on":""});
 $("fbar").hidden=!(T==="bills"||T==="salary");
-$("newbar").hidden=T!=="bills";$("newform").hidden=!NEWOPEN;$("newbtn").innerHTML=NEWOPEN?"&#215; Close":"+ New bill";
+rNewList();$("newbar").hidden=T!=="bills";$("newform").hidden=!NEWOPEN;$("newbtn").innerHTML=NEWOPEN?"&#215; Close":"+ New bill";
 $("undo").disabled=lastU()<0;$("redo").disabled=firstR()<0;rHist();
 var td=ymd(new Date()),lb=lastBk();
 var nag=bkNag();$("bkline").hidden=!nag;
@@ -435,7 +454,7 @@ if(!$("fbar").hidden)rFilters();
 if(T==="bills")rBills();else if(T==="today")rToday();else if(T==="totals")rTotals();else if(T==="salary")rSalary();else rMore()}
 
 function rBills(){
-var f=filt(false,false,true);f.sort(function(a,b){return sk(a.d)<sk(b.d)?1:-1});CUR=f;var sum=sumOf(f),act=active();
+var f=filt(false,false,true);f.sort(function(a,b){var x=sk(a.d),y=sk(b.d);return x<y?1:x>y?-1:(a.o||0)-(b.o||0)});CUR=f;var sum=sumOf(f),act=active();
 $("count").textContent=f.length+" unpaid";$("tot").textContent=fmt(sum);
 $("paybtn").hidden=!(act&&f.length>0);
 var show=payOpen&&act&&f.length>0;$("payc").hidden=!show;
@@ -455,13 +474,11 @@ var l=rows.filter(function(r){return isIso(r.d)&&r.d===sd&&rem(r)>0&&!r.s});TODA
 $("tfn").hidden=true;$("tfn").innerHTML="";
 var cl=0,cb=0,cg={},co=[];rows.forEach(function(r){var hit=false;(r.h||[]).forEach(function(e){if(e.d===sd){cl+=e.a;hit=true;var cu=(r.c||"").trim()||"(no customer)",cl2=cu.toLowerCase(),sp=cl2==="staff"||cl2==="c-o",nm=sp?(r.w||"").trim()||"(no waiter)":cu,k=(sp?cl2+"|":"")+nm.toLowerCase();if(!cg[k]){cg[k]={n:nm,t:0,co:cl2==="c-o",st:cl2==="staff"};co.push(k)}cg[k].t+=e.a}});if(hit)cb++});co.sort(function(a,b){return byName(cg[a].n,cg[b].n)});
 var nc=0,ns=0,no=0;co.forEach(function(k){if(cg[k].co)no++;else if(cg[k].st)ns++;else nc++});var CL=[];if(nc)CL.push(nc+" customer"+(nc===1?"":"s"));if(ns)CL.push(ns+" staff");if(no)CL.push(no+' <span class="co" style="font-size:12px">C-O</span>');
-$("tcol").innerHTML='<div class="top" style="align-items:flex-start"><div><b>Collected this shift</b><div class="mute">'+(cb?cb+" unpaid "+(cb===1?"bill":"bills")+" collected":"No unpaid collected")+'</div></div><div style="text-align:right"><b>'+fmt(cl)+'</b>'+(CL.length?'<div class="mute">'+CL.join("<br>")+'</div>':'')+'</div></div>'+(TCOP&&co.length?'<div style="margin-top:10px;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 10px">'+co.map(function(k){return '<div class="top" style="margin-bottom:3px"><span>'+esc(cg[k].n)+(cg[k].co?' <span class="co" style="font-size:12px">C-O</span>':'')+'</span><b>'+fmt(cg[k].t)+'</b></div>'}).join("")+'</div>':'');
+$("tcol").innerHTML='<div class="top" style="align-items:flex-start"><div><b>Collected this shift</b><div class="mute">'+(cb?cb+" unpaid "+(cb===1?"bill":"bills")+" collected":"No unpaid collected")+'</div></div><div style="text-align:right"><b>'+fmt(cl)+'</b>'+(CL.length?'<div class="mute">'+CL.join("<br>")+'</div>':'')+'</div></div>'+(TCOP&&co.length?'<div class="box" style="margin-top:10px;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 10px">'+co.map(function(k){return '<div class="top" style="margin-bottom:3px"><span>'+esc(cg[k].n)+(cg[k].co?' <span class="co" style="font-size:12px">C-O</span>':'')+'</span><b>'+fmt(cg[k].t)+'</b></div>'}).join("")+'</div>':'');
 $("thead").textContent="Shift "+dmy(sd);$("tcnt").textContent=bl(all.length);$("ttot").textContent=fmt(all.reduce(function(t,r){return t+(+r.a||0)},0));
-var g={},o=[];all.forEach(function(r){var nm=(r.c||"").trim()||"(no customer)",k=nm.toLowerCase();if(!g[k]){g[k]={name:nm,l:[]};o.push(k)}g[k].l.push(r)});
-o.sort(function(a,b){return byName(g[a].name,g[b].name)});
-$("titems").innerHTML=o.length?o.map(function(k){var x=g[k],ws={},wl=[];x.l.forEach(function(r){if(!ws[r.w]){ws[r.w]=1;wl.push(r.w)}});
-return '<div class="card"><div class="top"><b>'+cn(x.name)+'</b><span class="amt">'+fmt(x.l.reduce(function(t,r){return t+(+r.a||0)},0))+'</span></div><div class="mute">'+bl(x.l.length)+' · '+esc(wl.sort(byName).join(", "))+'</div>'+x.l.map(function(r){var t=tNote(r);return t?'<div class="mute" style="margin-top:3px">'+fmt(r.a)+' · '+t+'</div>':''}).join("")+'</div>'}).join(""):'<div class="card mute">No bills recorded for this shift.</div>';
-$("tcopy").hidden=!l.length;$("tall").hidden=!o.length}
+var ol=all.slice().sort(function(a,b){return (a.o||0)-(b.o||0)});
+$("titems").innerHTML=ol.length?ol.map(function(r){if(editId===r.id&&!NLEDIT)return editCard(r);var t=tNote(r);return '<div class="card"><div class="top"><b>'+cn((r.c||"").trim()||"(no customer)")+'</b><span class="amt">'+fmt(r.a)+'</span></div><div class="mute">'+wdot(r.w)+esc(r.w)+(t?' \u00b7 '+t:'')+'</div><div class="pay" style="margin-top:6px"><button data-a="edit" data-id="'+r.id+'">Edit</button></div></div>'}).join(""):'<div class="card mute">No bills recorded for this shift.</div>';
+$("tcopy").hidden=!l.length;$("tall").hidden=!ol.length}
 
 function hasK(o){for(var k in o)return true;return false}
 function selOk(r,skip){var w=(r.w||"").trim().toLowerCase(),c=((r.c||"").trim()||"(no customer)").toLowerCase(),m=mkey(r);
@@ -656,8 +673,8 @@ render();return}
 billAct(a,id)}
 function billAct(a,id){
 var r=rows.filter(function(x){return x.id===id})[0];if(!r)return;
-if(a==="edit"){editId=id;render();return}
-if(a==="ecancel"){editId=null;render();return}
+if(a==="edit"){editId=id;NLEDIT=NLN;render();return}
+if(a==="ecancel"){editId=null;NLEDIT=false;render();return}
 if(a==="esave"){var em=$("em"+id),nw=$("ew"+id).value.trim(),nc=$("ec"+id).value.trim(),na=parseFloat($("ea"+id).value),nd=$("ed"+id).value;
 if(!nw){em.textContent="Waiter cannot be empty.";return}
 if(!nc){em.textContent="Customer cannot be empty. Use the name, Staff or C-O.";return}
@@ -665,10 +682,7 @@ if(!(na>0)){em.textContent="Type the bill amount.";return}
 if(na<r.p){em.textContent="Bill amount cannot be less than what is already paid ("+fmt(r.p)+").";return}
 var b1=JSON.stringify(rows),ow=r.w,oc=r.c||"",chg=0;
 r.w=nw;r.c=nc;r.a=na;if(nd)r.d=nd;
-if($("er"+id).checked)rows.forEach(function(x){if(x===r)return;
-if(nw!==ow&&x.w.toLowerCase()===ow.toLowerCase()){x.w=nw;chg++}
-if(nc!==oc&&oc&&(x.c||"").toLowerCase()===oc.toLowerCase()){x.c=nc;chg++}});
-done(b1);save();editId=null;render();say("Saved."+(chg?" Also changed the name on "+chg+" other "+(chg===1?"bill":"bills")+".":"")+" Tap Undo if this was a mistake.");return}
+done(b1);save();editId=null;NLEDIT=false;render();say("Saved."+(chg?" Also changed the name on "+chg+" other "+(chg===1?"bill":"bills")+".":"")+" Tap Undo if this was a mistake.");return}
 var b0=JSON.stringify(rows);
 if(a==="flag"){r.s=!r.s;if(r.s)r.fd=shiftDay();else delete r.fd}
 else if(a==="full")payRow(r,rem(r));
@@ -676,7 +690,7 @@ else if(a==="reopen"){r.p=0;r.h=[];delete r.pd}
 else if(a==="part"){var v=parseFloat($("p"+id).value);if(!(v>0))return;payRow(r,v)}
 else if(a==="del"){if(delArm!==id){delArm=id;render();return}rows=rows.filter(function(x){return x.id!==id});delArm=null}
 done(b0);save();render()}
-$("items").addEventListener("click",billClick);$("sitems").addEventListener("click",billClick);$("bitems").addEventListener("click",billClick);
+$("items").addEventListener("click",billClick);$("sitems").addEventListener("click",billClick);$("bitems").addEventListener("click",billClick);$("titems").addEventListener("click",billClick);
 
 /* today */
 $("tday").addEventListener("change",function(){TDAY=this.value||"";render()});
@@ -702,6 +716,19 @@ $("fd").addEventListener("input",function(){fdTouched=true});
 $("newbtn").addEventListener("click",function(){NEWOPEN=!NEWOPEN;if(NEWOPEN&&!fdTouched)$("fd").value=shiftDay();render();if(NEWOPEN){try{$("fw").focus()}catch(e){}}});
 $("ncancel").addEventListener("click",function(){FPEND={};showChk();$("fw").value="";$("fc").value="";$("fa").value="";$("fp").value="";NEWOPEN=false;render()});
 
+
+/* new bill: waiter helper + just saved */
+var SAVED=[],NLEDIT=false,NLN=false;
+function wsug(){var t=$("fw").value.trim().toLowerCase(),h="";if(t){var m=known("w"),l=Object.keys(m).filter(function(k){return k.indexOf(t)===0&&k!==t}).sort(function(a,b){return m[b].n-m[a].n}).slice(0,4);h=l.map(function(k){return '<button class="sm" data-ws="'+esc(m[k].name)+'">'+esc(m[k].name)+'</button>'}).join("")}$("fwsug").innerHTML=h}
+$("fw").addEventListener("input",wsug);
+$("fwsug").addEventListener("click",function(e){var v=e.target.getAttribute("data-ws");if(!v)return;$("fw").value=v;wsug();$("fc").focus()});
+$("fw").addEventListener("keydown",function(e){if(e.key!=="Enter"&&e.keyCode!==13)return;e.preventDefault();var t=this.value.trim().toLowerCase();if(t){var m=known("w"),l=Object.keys(m).filter(function(k){return k.indexOf(t)===0}).sort(function(a,b){return m[b].n-m[a].n});if(l.length&&l[0]!==t)this.value=m[l[0]].name;else if(m[t])this.value=m[t].name}wsug();$("fc").focus()});
+$("fc").addEventListener("keydown",function(e){if(e.key==="Enter"||e.keyCode===13){e.preventDefault();$("fa").focus()}});
+function rNewList(){var h="";SAVED=SAVED.filter(function(id){return rows.some(function(x){return x.id===id})});
+if(SAVED.length)h='<b>Just saved</b>'+SAVED.map(function(id){var r=rows.filter(function(x){return x.id===id})[0];if(editId===id&&NLEDIT)return editCard(r);return '<div class="card" style="margin:6px 0"><div class="top"><b>'+esc(r.c||"")+'</b><span class="amt">'+fmt(r.a)+'</span></div><div class="mute">'+wdot(r.w)+esc(r.w)+' \u00b7 '+dmy(r.d)+(r.p?' \u00b7 paid '+fmt(r.p):'')+'</div><div class="pay" style="margin-top:6px"><button data-a="edit" data-id="'+r.id+'">Edit</button></div></div>'}).join("");
+$("newlist").innerHTML=h}
+$("newlist").addEventListener("click",function(e){NLN=true;try{billClick(e)}finally{NLN=false}});
+
 /* name check */
 var KEEP={w:{},c:{}},FPEND={};
 function known(f){var m={};rows.forEach(function(r){var v=((f==="w"?r.w:r.c)||"").trim();if(!v)return;var k=v.toLowerCase();if(!m[k])m[k]={n:0,c:{}};m[k].n++;m[k].c[v]=(m[k].c[v]||0)+1});
@@ -724,8 +751,8 @@ FPEND={};var cw=nameChk("w",w),cc=nameChk("c",c);
 if(cw&&cw.fix){w=cw.fix;$("fw").value=w;cw=null}if(cc&&cc.fix){c=cc.fix;$("fc").value=c;cc=null}
 if(cw&&cw.ask)FPEND.w={typed:w,ask:cw.ask};if(cc&&cc.ask)FPEND.c={typed:c,ask:cc.ask};
 if(FPEND.w||FPEND.c){showChk();say("Check the name above, then it saves.",true);return}showChk();
-var b0=JSON.stringify(rows);rows.push({id:uid(),d:$("fd").value,w:w,c:c,a:a,p:Math.min(p,a)});done(b0);save();
-$("fc").value="";$("fa").value="";$("fp").value="";say("Saved. Enter another or tap Close.");try{$("fc").focus()}catch(e){}});
+var b0=JSON.stringify(rows),nid=uid();rows.push({id:nid,d:$("fd").value,w:w,c:c,a:a,p:Math.min(p,a)});done(b0);save();SAVED.unshift(nid);SAVED=SAVED.slice(0,8);
+$("fw").value="";$("fc").value="";$("fa").value="";$("fp").value="";wsug();render();say("Saved: "+w+" \u00b7 "+c+" \u00b7 "+fmt(a)+". Check it below. Pick the next waiter.");try{$("fw").focus()}catch(e){}});
 
 /* import */
 function num(v){if(typeof v==="number")return v;var n=parseFloat(String(v==null?"":v).replace(/[^0-9.\-]/g,""));return isNaN(n)?0:n}
@@ -865,6 +892,70 @@ else{var m={};res.forEach(function(rs){var g={};rs.forEach(function(r){var k=key
 Object.keys(g).forEach(function(k){var ex=m[k]=m[k]||[];g[k].forEach(function(r,i){if(i<ex.length){dups++;if(r.p>ex[i].p)ex[i].p=r.p}else{ex.push(r);all.push(r)}})})})}
 LASTD=dups;addRows(all)}).catch(function(e){say("Could not read the Excel file ("+(e&&e.message?e.message:"error")+"). If it is an old .xls, save it as .xlsx and try again.",true)})});
 
+
+
+/* safety copies */
+var SNDB=null;
+function snDb(cb){if(SNDB)return cb(SNDB);try{var q=indexedDB.open("unpaid_snap",1);q.onupgradeneeded=function(){q.result.createObjectStore("s",{keyPath:"at"})};q.onsuccess=function(){SNDB=q.result;cb(SNDB)};q.onerror=function(){cb(null)}}catch(e){cb(null)}}
+function snap(str,why){try{var n=0;try{n=JSON.parse(str).length}catch(e){}snDb(function(db){if(!db)return;var tx=db.transaction("s","readwrite"),st=tx.objectStore("s");st.put({at:Date.now(),why:why,n:n,s:str});
+var all=st.getAllKeys();all.onsuccess=function(){var ks=all.result.sort(function(a,b){return a-b});while(ks.length>8)st.delete(ks.shift())}})}catch(e){}}
+function snList(cb){snDb(function(db){if(!db)return cb([]);var r=db.transaction("s").objectStore("s").getAll();r.onsuccess=function(){cb(r.result.sort(function(a,b){return b.at-a.at}))};r.onerror=function(){cb([])}})}
+function snDaily(){try{var d=shiftDay();if(localStorage.getItem("unpaid_snapday")===d||!rows.length)return;localStorage.setItem("unpaid_snapday",d);snap(JSON.stringify(rows),"Daily copy")}catch(e){}}
+var SNARM=null;
+function snShow(){var m=$("snmsg");m.textContent="Reading ...";snList(function(l){if(!l.length){m.textContent="No safety copies yet.";return}
+m.innerHTML=l.map(function(e){return '<div style="margin:6px 0;padding:8px 10px;background:var(--soft);border:1px solid var(--line);border-radius:10px"><b>'+esc(e.why)+'</b><div class="mute">'+esc(hhm(e.at))+' \u00b7 '+bl(e.n)+'</div><button class="btn alt" data-sn="'+e.at+'" style="margin-top:6px">'+(SNARM===e.at?"Sure? Tap again":"Restore")+'</button></div>'}).join("")})}
+$("sntog").addEventListener("click",function(){snShow()});
+$("snmsg").addEventListener("click",function(e){var a=parseInt(e.target.getAttribute("data-sn"),10);if(!a)return;
+if(SNARM!==a){SNARM=a;snShow();return}SNARM=null;
+snDb(function(db){if(!db)return;var r=db.transaction("s").objectStore("s").get(a);r.onsuccess=function(){var x=r.result;if(!x)return;var b0=JSON.stringify(rows);try{rows=JSON.parse(x.s)}catch(er){return}
+done(b0,"Restored safety copy");save();TACT="undo";render();snShow();say("Restored "+rows.length+" bills from the safety copy ("+hhm(x.at)+"). Tap Undo if this was a mistake.")}})});
+
+/* advanced tools */
+$("advtog").addEventListener("click",function(){var h=$("advc").hidden;$("advc").hidden=!h;this.innerHTML="Advanced tools "+(h?"&#9650;":"&#9660;")});
+var RNP=null;
+function rnCount(){var k=$("rnk").value,o=$("rno").value.trim().toLowerCase(),n=0;if(o)rows.forEach(function(r){if(((k==="w"?r.w:r.c)||"").trim().toLowerCase()===o)n++});return n}
+["rnk","rno","rnn"].forEach(function(i){$(i).addEventListener("input",function(){RNP=null;$("rngo").disabled=true;$("rngo").textContent="Rename";$("rnmsg").textContent=""})});
+$("rnchk").addEventListener("click",function(){var o=$("rno").value.trim(),nw=$("rnn").value.trim();if(!o||!nw){$("rnmsg").textContent="Type the old name and the new name.";return}
+var n=rnCount();RNP=null;$("rngo").textContent="Rename";$("rngo").disabled=!n;$("rnmsg").textContent=n?n+" "+(n===1?"bill has":"bills have")+" this "+($("rnk").value==="w"?"waiter":"customer")+" name. Tap Rename to change them to "+nw+".":"No bills found with that name."});
+$("rngo").addEventListener("click",function(){var k=$("rnk").value,o=$("rno").value.trim().toLowerCase(),nw=$("rnn").value.trim();if(!o||!nw)return;
+if(!RNP){RNP=1;this.textContent="Sure? Tap again";return}
+var b0=JSON.stringify(rows),n=0;rows.forEach(function(r){if(((k==="w"?r.w:r.c)||"").trim().toLowerCase()===o){if(k==="w")r.w=nw;else r.c=nw;n++}});
+done(b0,"Renamed "+n+" bills");save();RNP=null;this.textContent="Rename";this.disabled=true;$("rnmsg").textContent="Done. Changed "+n+" bills. Tap Undo if this was a mistake.";render();say("Renamed "+n+" bills. Tap Undo if this was a mistake.")});
+
+/* fix names from file */
+var FXP=null,FXD=null;
+function nm(x){return (x||"").trim().toLowerCase()}
+function fxPlan(list){var A={},F={},same=0,fix=[],pairs=[],add=function(m,k,r){(m[k]=m[k]||[]).push(r)};
+var ap=rows.slice(),fp=list.slice();
+function pass(kf,need){var am={},fm={};ap.forEach(function(r){add(am,kf(r),r)});fp.forEach(function(r){add(fm,kf(r),r)});
+var ua={},uf={};
+Object.keys(am).forEach(function(k){var a=am[k],f=fm[k];if(!f)return;
+if(need===1&&!(a.length===1&&f.length===1))return;
+a=a.slice().sort(function(x,y){return x.p-y.p});f=f.slice().sort(function(x,y){return x.p-y.p});
+var m=Math.min(a.length,f.length);for(var i=0;i<m;i++){ua[a[i].id]=1;uf[f[i].__i]=1;pairs.push({r:a[i],fi:f[i].__i});var ch=(a[i].w!==f[i].w)||((a[i].c||"")!==(f[i].c||""));if(ch)fix.push({r:a[i],w:f[i].w,c:f[i].c||"",d:a[i].d});else same++}});
+ap=ap.filter(function(r){return!ua[r.id]});fp=fp.filter(function(r){return!uf[r.__i]})}
+fp.forEach(function(r,i){r.__i=i});
+pass(function(r){return [r.d,nm(r.w),nm(r.c),+r.a].join("|")},0);
+pass(function(r){return [r.d,nm(r.c),+r.a].join("|")},0);
+pass(function(r){return [r.d,nm(r.w),+r.a].join("|")},0);
+pass(function(r){return [r.d,+r.a].join("|")},1);
+return {same:same,fix:fix,left:ap,extra:fp,pairs:pairs}}
+function fxShow(pl){var m=$("fxmsg"),nw=0,nc=0;pl.fix.forEach(function(x){if(x.r.w!==x.w)nw++;if((x.r.c||"")!==x.c)nc++});
+var h='<div>Bills already right: <b>'+pl.same+'</b></div><div>Names to fix: <b>'+pl.fix.length+'</b> <span class="mute">(waiter on '+nw+', customer on '+nc+')</span></div><div>App bills not found in the file (left alone): <b>'+pl.left.length+'</b></div><div>File rows not in the app (not added): <b>'+pl.extra.length+'</b></div>';
+if(pl.fix.length){h+='<div style="margin-top:8px;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 10px;max-height:260px;overflow:auto;font-size:14px">'+pl.fix.slice(0,60).map(function(x){return '<div style="margin-bottom:4px">'+esc(dmy(x.d))+' \u00b7 '+fmt(x.r.a)+'<br><span class="mute">'+esc(x.r.w)+' \u00b7 '+esc(x.r.c||"")+'</span> \u2192 <b>'+esc(x.w)+' \u00b7 '+esc(x.c)+'</b></div>'}).join("")+(pl.fix.length>60?'<div class="mute">and '+(pl.fix.length-60)+' more</div>':'')+'</div><button class="btn" id="fxgo">Fix names</button>'}
+else h+='<div class="mute" style="margin-top:6px">Nothing to fix.</div>';
+if(pl.left.length){h+='<div style="margin-top:12px"><b>Not in your file ('+pl.left.length+')</b><div class="mute">These may be duplicates. Delete only the ones you are sure about. Each Delete needs 2 taps.</div>'+pl.left.slice(0,80).map(function(r){return '<div style="margin:6px 0;padding:8px 10px;background:var(--soft);border:1px solid var(--line);border-radius:10px"><b>'+esc(r.c||"")+'</b> \u00b7 '+fmt(r.a)+(r.p?' (paid '+fmt(r.p)+')':'')+'<div class="mute">'+esc(dmy(r.d))+' \u00b7 '+esc(r.w)+'</div><button class="btn alt" data-fd="'+esc(r.id)+'" style="margin-top:6px">'+(FXD===r.id?"Sure? Tap again":"Delete")+'</button></div>'}).join("")+(pl.left.length>80?'<div class="mute">and '+(pl.left.length-80)+' more</div>':'')+'</div>'}
+m.innerHTML=h;var g=$("fxgo");if(g)g.addEventListener("click",function(){if(!FXP||FXP.arm!==1){FXP.arm=1;this.textContent="Sure? Tap again to fix "+FXP.fix.length+" names";return}
+var b0=JSON.stringify(rows),n=0;FXP.fix.forEach(function(x){x.r.w=x.w;x.r.c=x.c;n++});var dd={};FXP.fix.forEach(function(x){dd[x.d]=1});FXP.left.forEach(function(r){dd[r.d]=1});FXP.pairs.forEach(function(q){if(dd[q.r.d])q.r.o=q.fi+1});
+done(b0,"Fixed names on "+n+" bills");save();FXP=null;$("fxmsg").innerHTML='<b>Done.</b> Fixed names on '+n+' bills. Tap Undo if this was a mistake.';render();say("Fixed names on "+n+" bills. Tap Undo if this was a mistake.")})}
+$("fxmsg").addEventListener("click",function(e){var id=e.target.getAttribute&&e.target.getAttribute("data-fd");if(!id||!FXP)return;
+if(FXD!==id){FXD=id;fxShow(FXP);return}FXD=null;var b0=JSON.stringify(rows);rows=rows.filter(function(x){return x.id!==id});FXP.left=FXP.left.filter(function(x){return x.id!==id});FXP.fix=FXP.fix.filter(function(x){return rows.indexOf(x.r)>=0});FXP.pairs=FXP.pairs.filter(function(x){return rows.indexOf(x.r)>=0});done(b0,"Deleted 1 duplicate bill");save();render();fxShow(FXP);say("Deleted 1 bill. Tap Undo if this was a mistake.")});
+$("fxbtn").addEventListener("click",function(){$("fxfile").value=""});
+$("fxfile").addEventListener("change",function(){var fs=Array.prototype.slice.call($("fxfile").files||[]);if(!fs.length)return;
+$("fxmsg").textContent="Reading ...";var all=[],chain=Promise.resolve();LASTP=null;
+fs.forEach(function(f){chain=chain.then(function(){return fileRows(f).then(function(r){all=all.concat(r)})})});
+chain.then(function(){if(!all.length){$("fxmsg").textContent="No rows found in the file. It needs a header row: Date, Waiters, Customers, Amount, Paid.";return}
+alias(all);FXP=fxPlan(all);FXP.arm=0;fxShow(FXP)}).catch(function(e){$("fxmsg").textContent="Could not read the file ("+(e&&e.message?e.message:"error")+")."})});
 /* backup */
 function bkRows(){var d=new Date(shiftDay()+"T00:00:00");d.setDate(1);d.setMonth(d.getMonth()-1);var cut=d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-01";
 return rows.filter(function(r){return (r.a-r.p>0&&!r.s)||!isIso(r.d)||((r.a-r.p<=0&&r.pd)?r.pd:r.d)>=cut})}
@@ -923,7 +1014,7 @@ rsArm=false;$("rs").textContent="Restore";var b0=JSON.stringify(rows);rows=o.row
 set.mem=memOf(o);IMP=null;XBK=null;$("xbname").textContent="";save();$("bkt").value="";$("cmp").innerHTML="";TACT="undo";render();say("Restored "+rows.length+" entries. Wrong one? Tap Undo.",false,false,"Undo")});
 $("clear").addEventListener("click",function(){
 if(!clrArm){clrArm=true;render();return}
-var b0=JSON.stringify(rows);rows=[];set.mem="";IMP=null;done(b0);save();clrArm=false;render();say("All entries deleted. Tap \u21b6 to bring them back.")});
+var b0=JSON.stringify(rows);rows=[];set.mem="";IMP=null;done(b0,"Deleted all bills");save();clrArm=false;render();say("All entries deleted. Tap \u21b6 to bring them back.")});
 
 /* excel backup and restore (all bills, no 2 month limit) */
 var XBK=null,CRCT=null,LASTD=0,TOPEN=false;
@@ -1080,11 +1171,10 @@ return w+"\n"+body+"\nTotal: "+fmt(tot)}).join("\n\n");
 $("out").textContent=t?"UPDATES :- "+dmy(shiftDay())+"\n\n"+t:"Nothing unpaid to show.";say("")});
 $("copy").addEventListener("click",function(){copyText($("out").textContent,"out")});
 
-load();loadPre();alias(rows);save();BOOT=false;$("fd").value=shiftDay();render();
+load();loadPre();alias(rows);save();snDaily();BOOT=false;$("fd").value=shiftDay();render();
 (function(){var p=$("spl");function go(){p.classList.add("out");setTimeout(function(){p.hidden=true},550)}p.addEventListener("click",go);setTimeout(go,4600)})();
 </script>
-<script>
-/* Small Firebase connector (no SDK). Login = Firebase Auth REST, data = Firestore REST. */
+<script>/* Small Firebase connector (no SDK). Login = Firebase Auth REST, data = Firestore REST. */
 (function(){
 var KEY="AIzaSyDNPk8YX528YnmGgLJarOafd9Jr6hUcdE4",PID="unpaid-tracker",AK="unpaid_auth_v1";
 var DOCS="projects/"+PID+"/databases/(default)/documents";
@@ -1157,10 +1247,8 @@ return api(BASE+"/tracker/main/meta/"+id,{method:"GET"}).then(function(d){
 if(!d||!d.fields)return null;return {j:(d.fields.j&&d.fields.j.stringValue)||"",u:parseInt((d.fields.u&&d.fields.u.integerValue)||"0",10)}})}
 window.FB={info:info,user:user,signIn:signIn,signOut:signOut,push:push,pull:pull,getMeta:getMeta,ready:true};
 })();
-
 </script>
-<script>
-/* Sync + login for Unpaid Tracker (uses FB from fb.js). Local phone copy stays the working copy. */
+<script>/* Sync + login for Unpaid Tracker (uses FB from fb.js). Local phone copy stays the working copy. */
 (function(){
 var MK="unpaid_sync_v1",S=ld(),busy=false,again=false,timer=null,retryT=null,kind="gray",txt="Starting…",lastOk="",lastPull=0;
 function ld(){try{var o=JSON.parse(localStorage.getItem(MK));if(o&&o.m)return o}catch(e){}return {m:{},lastU:0,setH:"",preH:"",setU:0,preU:0}}
@@ -1256,7 +1344,6 @@ document.addEventListener("visibilitychange",function(){if(!document.hidden&&Dat
 window.addEventListener("online",function(){syncNow(false)});
 setInterval(function(){if(!document.hidden)syncNow(false)},240000);
 })();
-
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>
 </body>
