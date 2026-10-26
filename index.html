@@ -129,6 +129,7 @@ html.locked body>*:not(#login){visibility:hidden}
 <main>
 <div class="hd"><div class="lg"><svg width="36" height="36" viewBox="0 0 400 400" aria-hidden="true"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#18a070"/><stop offset="1" stop-color="#0a5a42"/></linearGradient><linearGradient id="ht" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#7ff0de"/><stop offset="1" stop-color="#27d3bd"/></linearGradient></defs><rect width="400" height="400" rx="90" fill="url(#hg)"/><text x="200" y="250" text-anchor="middle" font-size="150" font-weight="900" fill="#f8f8f2" font-family="Arial Black,Arial,sans-serif" letter-spacing="-6">Unp</text><circle cx="86" cy="106" r="18" fill="#ff4d6d"/><path d="M58,296 C140,326 250,322 340,262 L322,246 C250,292 150,296 58,296Z" fill="url(#ht)"/><path d="M340,262 L322,246 L352,244Z" fill="#f8f8f2"/></svg><h1>Unpaid Tracker</h1></div><div id="hb"><button class="sm" id="syp" aria-label="Sync status" title="Sync status" hidden>☁</button><button class="sm" id="undo" aria-label="Undo" title="Undo">↶</button><button class="sm" id="redo" aria-label="Redo" title="Redo">↷</button><button class="sm" id="hist" aria-label="Last actions" title="Last actions">≡</button></div></div>
 <div id="toast" hidden></div>
+<div id="vwbar" hidden>View only. Only the owner can change bills.</div>
 <div id="bkline" class="card bar" hidden></div>
 
 <div id="newbar">
@@ -280,7 +281,11 @@ html.locked body>*:not(#login){visibility:hidden}
 <label>Show bills from this date</label><input type="date" id="ckfrom" value="2026-10-20">
 <button class="btn alt" id="ckgo" style="margin-top:8px">Show list</button>
 <div id="ckbox" style="margin-top:8px"></div></div>
+<div class="card" id="vtcard" hidden><b>Try View only mode (test copy only)</b>
+<p class="mute" style="margin:6px 0 0">Shows how the app looks for a viewer. Tap again to go back.</p>
+<button class="btn alt" id="vtest" style="margin-top:8px">Turn on View only</button></div>
 </div>
+<div class="mute" id="verl" style="margin:14px 0 4px;text-align:center">App version 82</div>
 </section>
 </main>
 
@@ -293,13 +298,19 @@ var rows=[],set={x:"Abass, Adamu, C-O, Yonas, Solomon-S, Hanna, Debe S, Anileye"
 var SPAY=null,EXP=null,TEXPK=null,TCOP=false,SPOPEN=false,RSOPEN=false,BKERR="",SBOPEN=false,SSTW=null,SW={},SC={},DD=null,SB=false,STC=null,STK="c",CT={},WL={},MSUB="c",TL=[],skipX=false,TAB="bills",TSEG="c",MSEG="imp",NEWOPEN=false,SSEG="own",fOpen=false,payOpen=false,MS={},editId=null,delArm=null,payArm=null,bulkArm=false,bulkSig="",SIG="",CUR=[],TODAYL=[],fdTouched=false,clrArm=false,rsArm=false;
 var MN=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 function $(i){return document.getElementById(i)}
+var OWNER="melkamskenya@gmail.com",VTEST=false;
+function authEmail(){try{if(window.FB&&FB.user())return String(FB.user().email||"")}catch(e){}try{var a=JSON.parse(localStorage.getItem("unpaid_auth_v1"));return a&&a.rt?String(a.email||""):""}catch(e){return""}}
+function isView(){var m=authEmail().trim().toLowerCase();return m?m!==OWNER:VTEST}
+var VBLK="#undo,#redo,#hundo,#hredo,#tact,#newbtn,#scanbtn,#scanfile,#save,#paybtn,#payall,#payamt,#payapply,#spgo,#sstfs,#bulk,#xbtn,#xfile,#go,#paste,#rep,#pclr,#xbbtn,#xfile,#xbfile,#bkt,#rs,#clear,#rnchk,#rngo,#rno,#rnn,#fxbtn,#fxfile,#acfull,#scanrev button,#impck button,#snmsg button,#fxmsg button,[data-a=edit],[data-a=del],[data-a=full],[data-a=part],[data-a=flag],[data-a=reopen],[data-a=esave],[data-epa],[data-epo],[data-ia=save],[data-ia=useall],[data-ia=keepall],[data-ia=oldadd],[data-ia=oldskip]";
+(function(){var st=document.createElement("style");st.textContent=VBLK.split(",").map(function(x){return "body.vw "+x}).join(",")+",body.vw .pay input{opacity:.38}#vwbar{background:#fff4d6;color:#5a4300;border:1px solid #e8c766;text-align:center;font-weight:700;font-size:14px;padding:6px 10px;margin:6px 0}";document.head.appendChild(st)})();
+document.addEventListener("click",function(e){if(!isView())return;var t=e.target,m=t.closest&&t.closest(VBLK);if(!m)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();say("View only. Only the owner can change bills.",true)},true);
 function ux(a,b){var o=[],l={};((a||"")+","+(b||"")).split(",").forEach(function(x){x=x.trim();var k=x.toLowerCase();if(x&&!l[k]){l[k]=1;o.push(x)}});return o.join(", ")}
 function mx(o){if(o&&typeof o.x!=="string"&&(o.c!==undefined||o.w!==undefined))o.x=ux(o.c,o.w);if(o){delete o.c;delete o.w}return o}
 function mpre(a){return a.map(function(p){return typeof p.x==="string"?{n:p.n,x:p.x}:{n:p.n,x:ux(p.c,p.w)}})}
 function load(){try{var u=localStorage.getItem(UKEY);if(u){UNDO=JSON.parse(u).map(function(e){return typeof e==="string"?{s:e,t:"Earlier change",d:"",at:0}:e})}}catch(e){}try{var a=localStorage.getItem(KEY);if(a)rows=JSON.parse(a);var s=localStorage.getItem(SKEY);if(s){var o=mx(JSON.parse(s));for(var k in o)set[k]=o[k]}}catch(e){}}
 var BOOT=true,CKEY="unpaid_chg_at";
 function ordFix(){var mx=0,i;for(i=0;i<rows.length;i++)if(rows[i].o>mx)mx=rows[i].o;for(i=0;i<rows.length;i++)if(!(rows[i].o>0))rows[i].o=++mx}
-function save(){ordFix();try{localStorage.setItem(KEY,JSON.stringify(rows));localStorage.setItem(SKEY,JSON.stringify(set));if(!BOOT)localStorage.setItem(CKEY,stamp())}catch(e){}if(window.SYNC&&!BOOT)SYNC.dirty()}
+function save(){if(!isView())ordFix();try{localStorage.setItem(KEY,JSON.stringify(rows));localStorage.setItem(SKEY,JSON.stringify(set));if(!BOOT)localStorage.setItem(CKEY,stamp())}catch(e){}if(window.SYNC&&!BOOT)SYNC.dirty()}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function fmt(n){return Math.round(n).toLocaleString("en-US")}
 function isIso(d){return /^\d{4}-\d{2}-\d{2}$/.test(d||"")}
@@ -445,13 +456,13 @@ $("fbar").hidden=!(T==="bills"||T==="salary");
 rNewList();$("newbar").hidden=T!=="bills";$("newform").hidden=!NEWOPEN;$("newbtn").innerHTML=NEWOPEN?"&#215; Close":"+ New bill";
 $("undo").disabled=lastU()<0;$("redo").disabled=firstR()<0;rHist();
 var td=ymd(new Date()),lb=lastBk();
-var nag=bkNag();$("bkline").hidden=!nag;
+document.body.classList.toggle("vw",isView());$("vwbar").hidden=!isView();var nag=isView()?"":bkNag();$("bkline").hidden=!nag;
 $("bkline").innerHTML='<span style="color:var(--bad);font-weight:700">'+esc(nag)+'</span><button class="sm" id="bkn">Backup</button>';
 ["pre-today","pre-totals","pre-salary"].forEach(function(i){$(i).hidden=true});
 $("clear").textContent=clrArm?"Tap again: delete all":"Delete all";
 $("rs").textContent=rsArm?"Tap again":"Restore";
 if(!$("fbar").hidden)rFilters();
-if(T==="bills")rBills();else if(T==="totals")rTotals();else if(T==="salary")rSalary();else{rMore();chkRender()}}
+if(T==="bills")rBills();else if(T==="totals")rTotals();else if(T==="salary")rSalary();else{rMore();chkRender();var vc=$("vtcard");if(vc)vc.hidden=!!window.FB}}
 
 function rCount(f,act){var sum=sumOf(f);
 $("count").textContent=bl(f.length);$("tot").textContent=fmt(sum);
@@ -701,6 +712,7 @@ h+='<div class="ckr'+(pd?' fade':'')+'" data-a="edit" data-id="'+r.id+'">'+esc(r
 bx.innerHTML=h}
 document.addEventListener("click",function(e){if(e.target.id==="ckgo"){CKON=!CKON;render();return}var bx=$("ckbox");if(bx&&bx.contains(e.target)&&e.target.getAttribute&&e.target.getAttribute("data-a"))billClick(e)});
 document.addEventListener("change",function(e){if(e.target.id==="ckfrom"&&CKON)render()});
+document.addEventListener("click",function(e){if(e.target.id==="vtest"){VTEST=!VTEST;e.target.textContent=VTEST?"Turn off View only":"Turn on View only";render()}});
 /* single bills */
 var PEND={};
 function billClick(e){var a=e.target.getAttribute("data-a"),id=e.target.getAttribute("data-id");if(!a)return;
@@ -940,7 +952,7 @@ function snDb(cb){if(SNDB)return cb(SNDB);try{var q=indexedDB.open("unpaid_snap"
 function snap(str,why){try{var n=0;try{n=JSON.parse(str).length}catch(e){}snDb(function(db){if(!db)return;var tx=db.transaction("s","readwrite"),st=tx.objectStore("s");st.put({at:Date.now(),why:why,n:n,s:str});
 var all=st.getAllKeys();all.onsuccess=function(){var ks=all.result.sort(function(a,b){return a-b});while(ks.length>8)st.delete(ks.shift())}})}catch(e){}}
 function snList(cb){snDb(function(db){if(!db)return cb([]);var r=db.transaction("s").objectStore("s").getAll();r.onsuccess=function(){cb(r.result.sort(function(a,b){return b.at-a.at}))};r.onerror=function(){cb([])}})}
-function snDaily(){try{var d=shiftDay();if(localStorage.getItem("unpaid_snapday")===d||!rows.length)return;localStorage.setItem("unpaid_snapday",d);snap(JSON.stringify(rows),"Daily copy")}catch(e){}}
+function snDaily(){if(isView())return;try{var d=shiftDay();if(localStorage.getItem("unpaid_snapday")===d||!rows.length)return;localStorage.setItem("unpaid_snapday",d);snap(JSON.stringify(rows),"Daily copy")}catch(e){}}
 var SNARM=null;
 function snShow(){var m=$("snmsg");m.textContent="Reading ...";snList(function(l){if(!l.length){m.textContent="No safety copies yet.";return}
 m.innerHTML=l.map(function(e){return '<div style="margin:6px 0;padding:8px 10px;background:var(--soft);border:1px solid var(--line);border-radius:10px"><b>'+esc(e.why)+'</b><div class="mute">'+esc(hhm(e.at))+' \u00b7 '+bl(e.n)+'</div><button class="btn alt" data-sn="'+e.at+'" style="margin-top:6px">'+(SNARM===e.at?"Sure? Tap again":"Restore")+'</button></div>'}).join("")})}
@@ -1302,14 +1314,16 @@ function waiting(){var n=0,by={};rows.forEach(function(r){by[r.id]=1;if(S.m[r.id
 if(hs(sj(set))!==S.setH)n++;if(hs(sj(PRE))!==S.preH)n++;return n}
 function hm(){var d=new Date();return ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)}
 function show(k,t){kind=k;txt=t;var p=$("syp");if(p){p.className="sm sy-"+k;p.hidden=false}var a=$("acst");if(a)a.textContent=t;var e=$("acem");var u=window.FB&&FB.user();if(e)e.textContent=u?u.email:"";var d=$("acid");if(d&&u&&FB.info){var i=FB.info();d.textContent="Login details: email "+i.email+" | id "+i.uid}}
-function ok(){lastOk=hm();var w=waiting();if(w)show("wait",w+" change"+(w>1?"s":"")+" waiting to save.");else show("ok","All saved to Firebase at "+lastOk+".")}
+function ok(){lastOk=hm();if(VW()){show("ok","Up to date at "+lastOk+". View only.");return}var w=waiting();if(w)show("wait",w+" change"+(w>1?"s":"")+" waiting to save.");else show("ok","All saved to Firebase at "+lastOk+".")}
 function fail(e){var c=e&&e.code;
 if(c==="SIGNED_OUT"){gate("Please sign in again.");return}
-var w=waiting(),n=w?w+" change"+(w>1?"s":"")+" saved on this phone only.":"";
+var w=VW()?0:waiting(),n=w?w+" change"+(w>1?"s":"")+" saved on this phone only.":"";
 if(c==="NET"){show("wait","No internet. "+(n||"Your bills are safe on this phone.")+" It will sync when internet is back.");schedule(45000)}
 else if(c==="DENIED"){show("bad","Firebase refused. "+n+" Tell Claude: "+(e.message||"denied"))}
 else{show("bad","Sync problem. "+n+" Tell Claude: "+(e&&e.message||"error"));schedule(90000)}}
 function schedule(ms){clearTimeout(retryT);retryT=setTimeout(function(){run()},ms)}
+function VW(){return typeof isView==="function"&&isView()}
+function wrows(){var n=0,by={};rows.forEach(function(r){by[r.id]=1;if(S.m[r.id]!==rh(r))n++});Object.keys(S.m).forEach(function(id){if(!by[id])n++});return n}
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(rows))}catch(e){}}
 function applyMeta(id,cur,hKey,uKey,assign,store){
 return FB.getMeta(id).then(function(m){
@@ -1317,6 +1331,8 @@ var dirty=S[hKey]!==""&&hs(sj(cur()))!==S[hKey];
 if(m&&m.u>S[uKey]&&!dirty){var o;try{o=JSON.parse(m.j)}catch(e){return 0}assign(o);S[hKey]=hs(sj(cur()));S[uKey]=m.u;store();return 1}
 return 0})}
 function pull(full){
+if(VW()&&wrows()>0){full=true}
+if(VW()&&full){rows.length=0;S.m={};S.lastU=0}
 return FB.pull(full?0:S.lastU).then(function(docs){
 var by={};rows.forEach(function(r){by[r.id]=r});var n=0,mx=S.lastU,first=S.lastU===0&&!full,rk={};
 docs.forEach(function(d){if(d.u>mx)mx=d.u;var rr=null;try{rr=JSON.parse(d.j)}catch(e){}if(!rr||!rr.id)return;var id=rr.id,loc=by[id],dirty=loc&&S.m[id]!==rh(loc);
@@ -1349,8 +1365,8 @@ fixIds();
 if(busy){again=true;return Promise.resolve()}
 busy=true;show("gray","Syncing…");clearTimeout(retryT);
 var p=Promise.resolve();if(doPull)p=p.then(function(){return pull(full)});
-return p.then(function(){return push()}).then(function(){busy=false;ok();if(again){again=false;dirty()}}).catch(function(e){busy=false;again=false;fail(e)})}
-function dirty(){clearTimeout(timer);timer=setTimeout(function(){run(false)},1500);if(window.FB&&FB.user()){var w=waiting();if(w&&kind==="ok")show("wait",w+" change"+(w>1?"s":"")+" waiting to save.")}}
+return p.then(function(){return VW()?0:push()}).then(function(){busy=false;ok();if(again){again=false;dirty()}}).catch(function(e){busy=false;again=false;fail(e)})}
+function dirty(){clearTimeout(timer);timer=setTimeout(function(){run(VW())},1500);if(!VW()&&window.FB&&FB.user()){var w=waiting();if(w&&kind==="ok")show("wait",w+" change"+(w>1?"s":"")+" waiting to save.")}}
 function syncNow(full){return run(true,full)}
 window.SYNC={dirty:dirty,now:syncNow,status:function(){return txt}};
 
@@ -1363,7 +1379,7 @@ function go(){var em=$("lg-em").value.trim(),pw=$("lg-pw").value;var m=$("lg-msg
 if(!window.FB){m.textContent="The connection file did not load. Turn on internet and reload the app.";return}
 if(!em||!pw){m.textContent="Type your email and password.";return}
 sg.disabled=true;sg.textContent="Signing in…";m.textContent="";
-FB.signIn(em,pw).then(function(){sg.disabled=false;sg.textContent="Sign in";gate();syncNow(false)},function(e){sg.disabled=false;sg.textContent="Sign in";var c=e&&e.code;
+FB.signIn(em,pw).then(function(){sg.disabled=false;sg.textContent="Sign in";gate();try{render()}catch(e){}syncNow(false)},function(e){sg.disabled=false;sg.textContent="Sign in";var c=e&&e.code;
 m.textContent=c==="BAD"?"Wrong email or password. Check and try again.":c==="NET"?"No internet. You need internet to sign in.":c==="MANY"?"Too many tries. Wait a few minutes, then try again.":"Could not sign in. Tell Claude: "+(e&&e.message||c||"error")})}
 sg.addEventListener("click",go);
 $("lg-pw").addEventListener("keydown",function(e){if(e.key==="Enter")go()});
@@ -1375,7 +1391,7 @@ $("syp").addEventListener("click",function(){say(txt,kind==="bad")});
 $("acsync").addEventListener("click",function(){say("Syncing…");syncNow(false).then(function(){say(txt,kind==="bad")})});
 $("acfull").addEventListener("click",function(){say("Getting everything from Firebase…");syncNow(true).then(function(){say(txt,kind==="bad")})});
 $("acout").addEventListener("click",function(){var b=$("acout");
-if(!so){so=true;var w=waiting();b.textContent=w?"Sure? "+w+" change"+(w>1?"s":"")+" not saved":"Sure?";setTimeout(function(){so=false;b.textContent="Sign out"},4000);return}
+if(!so){so=true;var w=VW()?0:waiting();b.textContent=w?"Sure? "+w+" change"+(w>1?"s":"")+" not saved":"Sure?";setTimeout(function(){so=false;b.textContent="Sign out"},4000);return}
 so=false;b.textContent="Sign out";FB.signOut();gate("Signed out.")});
 
 /* start */
