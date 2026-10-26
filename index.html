@@ -48,6 +48,7 @@ button:active:not(:disabled),.lb:active{filter:brightness(.78);transform:scale(.
 .pay button[data-a="part"]{border-radius:50%;width:46px;height:46px;padding:0;flex:none}
 .act button[data-a="full"]{color:var(--bad);border:2px solid var(--bad);background:transparent;font-weight:900;letter-spacing:.5px;font-size:15px;padding:8px 12px;transform:none;box-shadow:inset 0 0 0 1px var(--bad)}
 .card{position:relative}
+.ckr{padding:10px;border:1px solid var(--line);border-radius:10px;margin:4px 0;background:var(--card);font-size:15px}.ckr.fade{opacity:.55}.ckt{text-align:right;font-weight:800;margin:2px 2px 10px}
 .act button[data-a="full"].und{color:var(--ink);border:2px solid var(--line);background:var(--soft);transform:none;box-shadow:none}
 .stamp{position:absolute;left:12px;top:30%;color:var(--bad);border:4px double var(--bad);border-radius:10px;padding:4px 14px;font-weight:900;font-size:30px;letter-spacing:2px;line-height:1.1;background:rgba(255,255,255,.35);pointer-events:none;animation:stampIn .5s cubic-bezier(.2,1.7,.4,1) both;z-index:5}
 @keyframes stampIn{0%{transform:scale(3.2) rotate(-14deg);opacity:0}55%{transform:scale(.92) rotate(-12deg);opacity:1}100%{transform:scale(1) rotate(-12deg);opacity:.92}}
@@ -274,6 +275,11 @@ html.locked body>*:not(#login){visibility:hidden}
 <p class="mute" style="margin:6px 0 0">Pick your corrected Excel file. Only names change.</p>
 <label class="btn alt lb" id="fxbtn" for="fxfile" style="margin-top:8px">Choose corrected Excel file</label><input type="file" id="fxfile" class="vh" multiple accept=".xlsx,.csv,.tsv,.txt">
 <div id="fxmsg" style="margin-top:8px"></div></div>
+<div class="card"><b>Check names after a date</b>
+<p class="mute" style="margin:6px 0 0">Shows a short list of bills. Nothing changes until you tap a line and Save.</p>
+<label>Show bills from this date</label><input type="date" id="ckfrom" value="2026-10-20">
+<button class="btn alt" id="ckgo" style="margin-top:8px">Show list</button>
+<div id="ckbox" style="margin-top:8px"></div></div>
 </div>
 </section>
 </main>
@@ -445,7 +451,7 @@ $("bkline").innerHTML='<span style="color:var(--bad);font-weight:700">'+esc(nag)
 $("clear").textContent=clrArm?"Tap again: delete all":"Delete all";
 $("rs").textContent=rsArm?"Tap again":"Restore";
 if(!$("fbar").hidden)rFilters();
-if(T==="bills")rBills();else if(T==="totals")rTotals();else if(T==="salary")rSalary();else rMore()}
+if(T==="bills")rBills();else if(T==="totals")rTotals();else if(T==="salary")rSalary();else{rMore();chkRender()}}
 
 function rCount(f,act){var sum=sumOf(f);
 $("count").textContent=bl(f.length);$("tot").textContent=fmt(sum);
@@ -677,6 +683,24 @@ if(left>=x){payRow(r,x);left-=x;full++}else{payRow(r,left);pl=" The last one is 
 $("payamt").value="";
 payDone(b0,"Applied "+fmt(amt)+": "+bl(full)+" Fully Paid"+(part?", 1 part paid.":".")+pl+" Tap Undo if this was a mistake.")});
 
+/* check names list */
+var CKON=false;
+function chkRender(){var bx=$("ckbox");if(!bx)return;$("ckgo").textContent=CKON?"Hide list":"Show list";if(!CKON){bx.innerHTML="";return}
+var fr=$("ckfrom").value;if(!isIso(fr)){bx.innerHTML='<div class="mute">Pick a start date.</div>';return}
+var l=rows.filter(function(r){return isIso(r.d)&&r.d>=fr});
+l.sort(function(a,b){return a.d<b.d?-1:a.d>b.d?1:(a.o||0)-(b.o||0)});
+if(!l.length){bx.innerHTML='<div class="mute">No bills from '+dmy(fr)+'.</div>';return}
+var wc={},wo=[];l.forEach(function(r){var k=r.w.trim().toLowerCase();if(!wc[k]){wc[k]={n:r.w,c:0};wo.push(k)}wc[k].c++});
+wo.sort(function(a,b){return byName(wc[a].n,wc[b].n)});
+var h='<b>'+bl(l.length)+' from '+dmy(fr)+'</b><div class="mute" style="margin:4px 0 8px">Waiters: '+wo.map(function(k){return esc(wc[k].n)+' ('+wc[k].c+')'}).join(", ")+'</div>';
+var last="",dt={};l.forEach(function(r){dt[r.d]=(dt[r.d]||0)+r.a});
+l.forEach(function(r){if(r.d!==last){last=r.d;h+='<div class="gh"><span>'+dmy(r.d)+'</span><span>'+fmt(dt[r.d])+'</span></div>'}
+if(editId===r.id){h+=editCard(r);return}
+var pd=rem(r)<=0;
+h+='<div class="ckr'+(pd?' fade':'')+'" data-a="edit" data-id="'+r.id+'">'+esc(r.w)+' \u00b7 '+esc(r.c||"(no customer)")+' \u00b7 '+fmt(r.a)+(pd?' \u00b7 paid':r.p?' \u00b7 part paid':'')+(r.s?' \u00b7 FS':'')+'</div>'});
+bx.innerHTML=h}
+document.addEventListener("click",function(e){if(e.target.id==="ckgo"){CKON=!CKON;render();return}var bx=$("ckbox");if(bx&&bx.contains(e.target)&&e.target.getAttribute&&e.target.getAttribute("data-a"))billClick(e)});
+document.addEventListener("change",function(e){if(e.target.id==="ckfrom"&&CKON)render()});
 /* single bills */
 var PEND={};
 function billClick(e){var a=e.target.getAttribute("data-a"),id=e.target.getAttribute("data-id");if(!a)return;
