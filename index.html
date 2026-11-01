@@ -272,6 +272,16 @@ html.locked body>*:not(#login){visibility:hidden}
 <div id="rnmsg" class="mute" style="margin-top:6px"></div></div>
 <div class="card"><b>Safety copies</b>
 <button class="btn alt" id="sntog">Show safety copies</button><div id="snmsg" style="margin-top:6px"></div></div>
+<div class="card"><b>Clean old bills</b>
+<p class="mute" style="margin:6px 0 0">Removes old bills that are finished (paid, and FS if ticked). Unpaid bills are never removed here. Check first: nothing changes.</p>
+<label>Remove bills dated before</label><input type="date" id="cldate" value="2026-01-01">
+<label class="chk" style="margin-top:8px"><input type="checkbox" id="clfs" checked> Also remove old FS bills</label>
+<div class="row"><button class="btn alt" id="clgo">Check</button><button class="btn" id="clrm" disabled>Remove</button></div>
+<div id="clmsg" style="margin-top:8px"></div></div>
+<div class="card"><b>Tidy Firebase (step 2, a day later)</b>
+<p class="mute" style="margin:6px 0 0">Step 1 only marks old bills as deleted, so every phone can remove them. This step removes those marks for good, so new phones read less. Do it one day after step 1, and only after every phone has opened the app once.</p>
+<div class="row"><button class="btn alt" id="fbcnt">Count marks</button><button class="btn" id="fbgo" disabled>Remove for good</button></div>
+<div id="fbmsg" class="mute" style="margin-top:8px"></div></div>
 <div class="card"><b>Fix names from a file</b>
 <p class="mute" style="margin:6px 0 0">Pick your corrected Excel file. Only names change.</p>
 <label class="btn alt lb" id="fxbtn" for="fxfile" style="margin-top:8px">Choose corrected Excel file</label><input type="file" id="fxfile" class="vh" multiple accept=".xlsx,.csv,.tsv,.txt">
@@ -285,7 +295,7 @@ html.locked body>*:not(#login){visibility:hidden}
 <p class="mute" style="margin:6px 0 0">Shows how the app looks for a viewer. Tap again to go back.</p>
 <button class="btn alt" id="vtest" style="margin-top:8px">Turn on View only</button></div>
 </div>
-<div class="mute" id="verl" style="margin:14px 0 4px;text-align:center">App version 82</div>
+<div class="mute" id="verl" style="margin:14px 0 4px;text-align:center">App version 83</div>
 </section>
 </main>
 
@@ -301,7 +311,7 @@ function $(i){return document.getElementById(i)}
 var OWNER="melkamskenya@gmail.com",VTEST=false;
 function authEmail(){try{if(window.FB&&FB.user())return String(FB.user().email||"")}catch(e){}try{var a=JSON.parse(localStorage.getItem("unpaid_auth_v1"));return a&&a.rt?String(a.email||""):""}catch(e){return""}}
 function isView(){var m=authEmail().trim().toLowerCase();return m?m!==OWNER:VTEST}
-var VBLK="#undo,#redo,#hundo,#hredo,#tact,#newbtn,#scanbtn,#scanfile,#save,#paybtn,#payall,#payamt,#payapply,#spgo,#sstfs,#bulk,#xbtn,#xfile,#go,#paste,#rep,#pclr,#xbbtn,#xfile,#xbfile,#bkt,#rs,#clear,#rnchk,#rngo,#rno,#rnn,#fxbtn,#fxfile,#acfull,#scanrev button,#impck button,#snmsg button,#fxmsg button,[data-a=edit],[data-a=del],[data-a=full],[data-a=part],[data-a=flag],[data-a=reopen],[data-a=esave],[data-epa],[data-epo],[data-ia=save],[data-ia=useall],[data-ia=keepall],[data-ia=oldadd],[data-ia=oldskip]";
+var VBLK="#undo,#redo,#hundo,#hredo,#tact,#newbtn,#scanbtn,#scanfile,#save,#paybtn,#payall,#payamt,#payapply,#spgo,#sstfs,#bulk,#xbtn,#xfile,#go,#paste,#rep,#pclr,#xbbtn,#xfile,#xbfile,#bkt,#rs,#clear,#rnchk,#rngo,#rno,#rnn,#clgo,#clrm,#cldate,#clfs,#fbcnt,#fbgo,#fxbtn,#fxfile,#acfull,#scanrev button,#impck button,#snmsg button,#fxmsg button,[data-a=edit],[data-a=del],[data-a=full],[data-a=part],[data-a=flag],[data-a=reopen],[data-a=esave],[data-epa],[data-epo],[data-ia=save],[data-ia=useall],[data-ia=keepall],[data-ia=oldadd],[data-ia=oldskip]";
 (function(){var st=document.createElement("style");st.textContent=VBLK.split(",").map(function(x){return "body.vw "+x}).join(",")+",body.vw .pay input{opacity:.38}#vwbar{background:#fff4d6;color:#5a4300;border:1px solid #e8c766;text-align:center;font-weight:700;font-size:14px;padding:6px 10px;margin:6px 0}";document.head.appendChild(st)})();
 document.addEventListener("click",function(e){if(!isView())return;var t=e.target,m=t.closest&&t.closest(VBLK);if(!m)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();say("View only. Only the owner can change bills.",true)},true);
 function ux(a,b){var o=[],l={};((a||"")+","+(b||"")).split(",").forEach(function(x){x=x.trim();var k=x.toLowerCase();if(x&&!l[k]){l[k]=1;o.push(x)}});return o.join(", ")}
@@ -974,6 +984,37 @@ if(!RNP){RNP=1;this.textContent="Sure? Tap again";return}
 var b0=JSON.stringify(rows),n=0;rows.forEach(function(r){if(((k==="w"?r.w:r.c)||"").trim().toLowerCase()===o){if(k==="w")r.w=nw;else r.c=nw;n++}});
 done(b0,"Renamed "+n+" bills");save();RNP=null;this.textContent="Rename";this.disabled=true;$("rnmsg").textContent="Done. Changed "+n+" bills. Tap Undo if this was a mistake.";render();say("Renamed "+n+" bills. Tap Undo if this was a mistake.")});
 
+/* clean old bills */
+var CLP=null,FBP=false;
+function clPlan(){var cut=$("cldate").value;if(!isIso(cut))return null;var fs=$("clfs").checked,ids={},paid=0,fsn=0,un=[],nd=0,keepfs=0;
+rows.forEach(function(r){if(!isIso(r.d)){nd++;return}if(r.d>=cut)return;
+if(r.s){if(fs){ids[r.id]=1;fsn++}else keepfs++;return}
+if(rem(r)>0){un.push(r);return}ids[r.id]=1;paid++});
+un.sort(function(a,b){return a.d<b.d?-1:a.d>b.d?1:0});return {cut:cut,ids:ids,paid:paid,fs:fsn,un:un,nd:nd,keepfs:keepfs,n:paid+fsn}}
+function clReset(){CLP=null;$("clrm").disabled=true;$("clrm").textContent="Remove";$("clmsg").innerHTML=""}
+["cldate","clfs"].forEach(function(i){$(i).addEventListener("input",clReset);$(i).addEventListener("change",clReset)});
+$("clgo").addEventListener("click",function(){var p=clPlan();if(!p){$("clmsg").textContent="Pick a date first.";return}
+var lb=lastBk(),h='<div class="mute">Before '+esc(dmy(p.cut))+':</div><div style="margin:6px 0"><b>'+p.n+'</b> bills will be removed: '+p.paid+' paid'+(p.fs?' + '+p.fs+' FS':'')+'.</div>';
+h+='<div style="margin:6px 0"><b>'+p.un.length+'</b> unpaid bills stay'+(p.un.length?' (total '+fmt(sumOf(p.un))+', oldest '+esc(dmy(p.un[0].d))+')':'')+'.</div>';
+if(p.keepfs)h+='<div class="mute">'+p.keepfs+' old FS bills stay (box not ticked).</div>';
+if(p.nd)h+='<div class="mute">'+p.nd+(p.nd===1?' bill has':' bills have')+' no date and stay.</div>';
+if(p.un.length)h+='<div class="mute" style="margin-top:6px">Oldest unpaid that stay:</div>'+p.un.slice(0,8).map(function(r){return '<div class="top" style="margin-top:3px"><span>'+esc(dmy(r.d))+' <span class="mute">'+esc(r.c||"")+' / '+esc(r.w||"")+'</span></span><b>'+fmt(rem(r))+'</b></div>'}).join("");
+if(p.n>15000)h+='<div style="margin-top:8px;color:#b3261e"><b>Too many for one day (the free limit is 20,000 a day). Pick a later date and do it in two steps.</b></div>';
+h+='<div class="mute" style="margin-top:8px">Last backup: '+(lb?esc(lb):"none yet")+'. Save an Excel backup before you remove. A safety copy is also made, and Undo works.</div>';
+$("clmsg").innerHTML=h;CLP=p;$("clrm").disabled=!p.n||p.n>15000;$("clrm").textContent="Remove "+p.n+" bills"});
+$("clrm").addEventListener("click",function(){if(!CLP)return;var p=clPlan();if(!p||p.n!==CLP.n||p.cut!==CLP.cut){clReset();$("clmsg").textContent="The bills changed. Tap Check again.";return}
+if(!CLP.arm){CLP.arm=true;this.textContent="Sure? Tap again to remove "+p.n;var b=this;setTimeout(function(){if(CLP&&CLP.arm){CLP.arm=false;b.textContent="Remove "+CLP.n+" bills"}},5000);return}
+var b0=JSON.stringify(rows);rows=rows.filter(function(r){return !p.ids[r.id]});if(!set.mem||set.mem<p.cut)set.mem=p.cut;
+done(b0,"Cleaned "+p.n+" old bills");save();var n=p.n;clReset();render();
+$("clmsg").innerHTML='<b>Done.</b> Removed '+n+' old bills. Other phones remove them when they next sync. Tap Undo if this was a mistake. Tomorrow, do step 2 below.';say("Removed "+n+" old bills. Tap Undo if this was a mistake.")});
+function fbOn(){return window.FB&&FB.user()&&!isView()}
+$("fbcnt").addEventListener("click",function(){var m=$("fbmsg");if(!fbOn()){m.textContent="Sign in and turn on internet first.";return}m.textContent="Counting ...";
+FB.countDel().then(function(n){FBP=false;$("fbgo").textContent="Remove for good";$("fbgo").disabled=!n;m.textContent=n+" deleted-bill marks are in Firebase."+(n?" Marks made less than one day ago are kept for now.":"")}).catch(function(e){m.textContent="Could not count: "+(e&&e.message||"error")})});
+$("fbgo").addEventListener("click",function(){var b=this,m=$("fbmsg");if(!fbOn())return;
+if(!FBP){FBP=true;b.textContent="Sure? Tap again";setTimeout(function(){if(FBP){FBP=false;b.textContent="Remove for good"}},5000);return}
+FBP=false;b.disabled=true;b.textContent="Working ...";m.textContent="Removing marks ...";
+FB.purgeDel(24*3600*1000,function(d,t){m.textContent="Removed "+d+" of "+t+" ..."}).then(function(r){b.textContent="Remove for good";m.textContent="Done. Removed "+r.removed+" marks for good."+(r.newer?" "+r.newer+" newer marks stay for now. Do this again tomorrow.":"")}).catch(function(e){b.disabled=false;b.textContent="Remove for good";m.textContent="Stopped: "+(e&&e.message||"error")+". Some may be removed. Tap Count marks, then try again later."})});
+
 /* fix names from file */
 var FXP=null,FXD=null;
 function nm(x){return (x||"").trim().toLowerCase()}
@@ -1298,7 +1339,18 @@ return page(since)}
 function getMeta(id){
 return api(BASE+"/tracker/main/meta/"+id,{method:"GET"}).then(function(d){
 if(!d||!d.fields)return null;return {j:(d.fields.j&&d.fields.j.stringValue)||"",u:parseInt((d.fields.u&&d.fields.u.integerValue)||"0",10)}})}
-window.FB={info:info,user:user,signIn:signIn,signOut:signOut,push:push,pull:pull,getMeta:getMeta,ready:true};
+var DELF={fieldFilter:{field:{fieldPath:"del"},op:"EQUAL",value:{booleanValue:true}}};
+function countDel(){return api(BASE+"/tracker/main:runAggregationQuery",{method:"POST",body:JSON.stringify({structuredAggregationQuery:{aggregations:[{alias:"n",count:{}}],structuredQuery:{from:[{collectionId:"bills"}],where:DELF}}})}).then(function(j){var f=j&&j[0]&&j[0].result&&j[0].result.aggregateFields;return f&&f.n?parseInt(f.n.integerValue||"0",10):0})}
+function listDel(){var all=[];
+function page(after){var q={from:[{collectionId:"bills"}],where:DELF,select:{fields:[{fieldPath:"u"}]},orderBy:[{field:{fieldPath:"__name__"},direction:"ASCENDING"}],limit:500};
+if(after)q.startAt={values:[{referenceValue:after}],before:false};
+return api(BASE+"/tracker/main:runQuery",{method:"POST",body:JSON.stringify({structuredQuery:q})}).then(function(j){var got=0,last="";(j||[]).forEach(function(x){var d=x&&x.document;if(!d||!d.name)return;got++;last=d.name;all.push({name:d.name,u:parseInt((d.fields&&d.fields.u&&d.fields.u.integerValue)||"0",10)})});
+if(got>=500&&last)return page(last);return all})}
+return page("")}
+function purgeDel(minAgeMs,prog){return listDel().then(function(l){var cut=(Date.now()-minAgeMs)*1000,old=l.filter(function(x){return x.u<cut}),keep=l.length-old.length,done=0,out=Promise.resolve();
+for(var s=0;s<old.length;s+=400)(function(part){out=out.then(function(){return api(BASE+":commit",{method:"POST",body:JSON.stringify({writes:part.map(function(x){return {delete:x.name}})})}).then(function(){done+=part.length;if(prog)prog(done,old.length)})})})(old.slice(s,s+400));
+return out.then(function(){return {removed:done,newer:keep}})})}
+window.FB={info:info,user:user,signIn:signIn,signOut:signOut,push:push,pull:pull,getMeta:getMeta,countDel:countDel,purgeDel:purgeDel,ready:true};
 })();
 </script>
 <script>/* Sync + login for Unpaid Tracker (uses FB from fb.js). Local phone copy stays the working copy. */
